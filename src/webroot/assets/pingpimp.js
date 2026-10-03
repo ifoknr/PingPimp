@@ -466,6 +466,8 @@ async function initSwitch(id, file, flagOn, flagOff, name) {
     } catch (err) {
       toast(`Failed to toggle ${name}`);
       switchEl.checked = !switchEl.checked;
+      const prevVal = switchEl.checked ? "1" : "0";
+      try { await exec(`echo "${prevVal}" > /data/adb/modules/PingPimp/${file}`); } catch (e) {}
     }
   };
 }
